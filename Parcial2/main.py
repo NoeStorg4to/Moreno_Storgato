@@ -1,6 +1,6 @@
 import pygame
-import json
 from funciones import *
+import random
 
 ventana = crear_ventana()
 
@@ -45,8 +45,17 @@ estamos_en_preguntas = False
 record = 0
 
 #Funcionamiento
+cambiamos_imagen = False
+bandera_seguir = None
 mostrar_botones = False
 ejecutar = True
+
+cambiar_imagen = lambda: (
+    ventana.blit(recursos["fondo_inicio2"], (0, 0)),
+    ventana.blit(recursos["gatito_sostiene"], (350, 240)),
+    ventana.blit(recursos["mensaje_continuar"], (350, 200))
+) if cambiamos_imagen == False else None
+
 
 while ejecutar:
     lista_eventos = pygame.event.get()
@@ -57,38 +66,61 @@ while ejecutar:
             
             pos_x = event.pos[0]
             pos_y = event.pos[1]
-            
-            if imagen_actual == recursos["fondo_inicio2"]:
-                # if pos_x >= 350 and pos_x <=(350 + 300) and pos_y >= 200 and pos_y <= (200 + 97):
-                #     pygame.event.post(pygame.event.Event(evento_pregunta1))
+
+            if cambiamos_imagen == True:
                 click_continuar(pos_x, pos_y, evento_pregunta1)
                     
                 respuesta = obtener_respuestas(pos_x,pos_y)
 
             if estamos_en_preguntas == True:
                 if respuesta == lista_preguntas[i_preguntas]["correcta"]:
-                    mostrar_botones = False
-                    estamos_en_preguntas = False
-                    
-                    retirarse_seguir(ventana, recursos, pos_x, pos_y, evento_pregunta1)
                     print ("RESPUESTA CORRECTA")
-                    
+
                     premio_ganado = premios[i_preguntas][1]
                     print(premio_ganado)
+
                     if premio_ganado > record:
                         record = premio_ganado
                     
                     inicio_tiempo = pygame.time.get_ticks()
-                    if i_preguntas < len(lista_preguntas)-1:
+
+                    bandera_seguir = retirarse_seguir(ventana, recursos)
+                    if bandera_seguir == True:
                         i_preguntas += 1
-                    else:
+                    
+                        if i_preguntas >= len(lista_preguntas):
+                            mostrar_botones = False
+                            estamos_en_preguntas = False
+                            ventana.fill(colores.NEGRO)
+                            ganaste(ventana, recursos)
+                            print("terminaste!")
+
+                    elif bandera_seguir == False:
+                        ventana.blit(recursos["fondo_inicio2"], (0, 0))
+                        ventana.blit(recursos["retirada"], (300, 200))
+                        ventana.blit(recursos["se_retira"], (300, 320))
+                        texto_loganado = recursos["fuente_loganado"].render(f"{premio_ganado}", False, colores.NEGRO)
+                        ventana.blit(texto_loganado, (400, 240))
+                        pygame.display.flip()
+                        pygame.time.wait(2000)
+
                         mostrar_botones = False
+                        pygame.display.update()
+                        cambiamos_imagen = False
+                        guardar_record_en_csv(nombre, premio_ganado, "premios.csv")
+
+                        print(premio_ganado)
+
+                        cambiar_imagen()
+                        #click_continuar(pos_x, pos_y, evento_pregunta1)
+                        bandera_seguir = True
                         estamos_en_preguntas = False
-                        ventana.fill(colores.NEGRO)
-                        ganaste(ventana, recursos)
-                        print("terminaste!")
-                    
-                    
+                        i_preguntas = 0
+                        random.shuffle(lista_preguntas)
+
+                    else:
+                        ejecutar = False
+
                 elif respuesta != -1:
                     mostrar_botones = False
                     ventana.blit(recursos["respuesta_incorrecta"], (300, 90)) 
@@ -96,24 +128,28 @@ while ejecutar:
                     pygame.display.update()
                     pygame.time.delay(3000)
                     estamos_en_preguntas = False
+                    cambiamos_imagen = False
+                    
+
                     premio_ganado = 0
-                    guardar_record_en_csv(premio_ganado)
-                    cambiar_ventanas(ventana, recursos)
-                    click_continuar(pos_x, pos_y, evento_pregunta1)
+                    guardar_record_en_csv(nombre, premio_ganado, "premios.csv")
+                    cambiar_imagen()
                     i_preguntas = 0
+                    random.shuffle(lista_preguntas)
                                             
                     print ("INCORRECTO")
                         
                 
 
         elif event.type == evento_para_iniciar:
-            if imagen_actual == recursos["fondo_inicio"]:
-                imagen_actual = recursos["fondo_inicio2"]
-                ventana.blit(imagen_actual, (0,0))
-                ventana.blit(recursos["gatito_sostiene"], (350,240))
-                ventana.blit(recursos["mensaje_continuar"], (350,200))
+            if cambiamos_imagen == False:
+                cambiar_imagen()
+                cambiamos_imagen = True
 
         elif event.type == evento_pregunta1:
+
+            nombre = pedir_nombre(ventana,recursos)
+            print(nombre)
             mostrar_botones = True
             estamos_en_preguntas = True
             inicio_tiempo = pygame.time.get_ticks()
@@ -126,7 +162,7 @@ while ejecutar:
         
         pregunta = lista_preguntas[i_preguntas]["pregunta"]
         respuestas = lista_preguntas[i_preguntas]["respuestas"]
-        blitear_preguntas_respuestas(ventana,recursos,pregunta,respuestas,imagen_actual)
+        blitear_preguntas_respuestas(ventana,recursos,pregunta,respuestas)
 
         mostrar_record(ventana, recursos, record)
         
@@ -135,6 +171,12 @@ while ejecutar:
         if tiempo <= 0:
             respuesta_incorrecta(ventana, recursos)
             ventana.blit(recursos["tiempo_terminado"], (300, 90))
+            cambiar_imagen()
+            
+            bandera_seguir = True
+            estamos_en_preguntas = False
+            i_preguntas = 0
+            random.shuffle(lista_preguntas)
             print("perdiste")
 
     clock.tick(30)

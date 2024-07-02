@@ -70,12 +70,12 @@
     "correcta": 0
   },
   {
-    "pregunta": "\u00bfCu\u00e1l es el metal m\u00e1s abundante en la corteza terrestre?",
+    "pregunta": "\u00bfCu\u00e1l es la capital de Jap\u00f3n?",
     "respuestas": [
-      "Hierro",
-      "Oro",
-      "Plata",
-      "Aluminio"
+      "Bangkok",
+      "Se\u00fal",
+      "Pek\u00edn",
+      "Tokio"
     ],
     "correcta": 3
   },
@@ -90,12 +90,12 @@
     "correcta": 0
   },
   {
-    "pregunta": "\u00bfCu\u00e1l de los siguientes \u00f3rganos es parte del sistema respiratorio?",
+    "pregunta": "\u00bfCu\u00e1l es el \u00f3rgano m\u00e1s grande del cuerpo humano?",
     "respuestas": [
       "Coraz\u00f3n",
-      "Est\u00f3mago",
-      "Pulmones",
-      "H\u00edgado"
+      "H\u00edgado",
+      "Piel",
+      "Intestinos"
     ],
     "correcta": 2
   }

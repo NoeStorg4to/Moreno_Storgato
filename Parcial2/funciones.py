@@ -19,17 +19,57 @@ def leer_json (path:str) -> list[dict]:
 
     return retorno
 
-def guardar_record_en_csv(record):
-    nombre_archivo = "record.csv"
+def guardar_record_en_csv(nombre, premio_ganado, path: str):
 
-    # Abrir el archivo CSV en modo escritura
-    archivo = open(nombre_archivo, mode='w')
-
-    # Escribir el récord en el archivo CSV
-    archivo.write(f"{record}\n")
-
-    # Cerrar el archivo
+    archivo = open(path, mode='a', newline='')
+    archivo.write(f"{nombre},{premio_ganado}\n")
     archivo.close()
+
+def pedir_nombre(ventana: pygame.Surface, recursos: dict):
+    pygame.font.init()
+    texto = ""
+    pedir_nombre = True
+
+    mensaje = "Ingrese su nombre por teclado:"
+    mensaje_superficie = recursos["fuente_mensaje_nombre"] .render(mensaje, True, colores.NEGRO)
+
+    error_mensaje = ""
+
+    while pedir_nombre:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    # Validar que el nombre contenga solo caracteres y tenga longitud máxima de 20
+                    if texto.isalpha() and len(texto) <= 20:
+                        pedir_nombre = False
+                    else:
+                        error_mensaje = "Nombre no válido. Use solo letras y máx. 20 caracteres."
+                elif event.key == pygame.K_BACKSPACE:
+                    texto = texto[:-1]
+                else:
+                    if len(texto) < 20:
+                        texto += event.unicode
+
+        ventana.fill(colores.BLANCO)
+        
+        ventana.blit(mensaje_superficie, (100, 50))
+
+        texto_superficie = recursos["fuente_ingreso_nombre"].render(texto, True, colores.AZUL)
+        ventana.blit(texto_superficie, (100, 150))
+
+        if error_mensaje:
+            error_superficie = recursos["fuente_mensaje_error"].render(error_mensaje, True, colores.ROSITA)
+            ventana.blit(error_superficie, (100, 250))
+        
+        pygame.display.flip()
+
+    return texto
+
+
+nombre =""
 
 
 def crear_ventana()-> pygame.Surface:
@@ -84,12 +124,16 @@ def cargar_recursos()->dict:
     recursos["tiempo_terminado"] = pygame.image.load("Imagenes\\tiempo_terminado.png")
     recursos["gatito_pensando"] = pygame.image.load("Imagenes\gatito_pensando.png")
 
-    recursos["fuente_preguntas"] = pygame.font.SysFont("Comic Sans MS", 20, True)
+    recursos["fuente_preguntas"] = pygame.font.SysFont("Comic Sans MS", 15, True)
     recursos["fuente_respuestas"] = pygame.font.SysFont("Comic Sans MS", 30, True)
     recursos["fuente_reloj"] = pygame.font.SysFont("Arial", 40, True)
     recursos["texto_record"] = pygame.font.SysFont("Arial", 20, True)
     recursos["fuente_ganaste"] = pygame.font.SysFont("Comic Sans MS", 40, True)
-    
+    recursos["fuente_loganado"] = pygame.font.SysFont("Comic Sans MS", 30, True)
+    recursos["fuente_ingreso_nombre"] = pygame.font.SysFont("Comic Sans MS", 50, True)
+    recursos["fuente_mensaje_nombre"] = pygame.font.SysFont("Comic Sans MS", 40, True)
+    recursos["fuente_mensaje_error"] = pygame.font.SysFont("Comic Sans MS", 30, True)
+
     
     return recursos
 
@@ -121,7 +165,7 @@ def obtener_respuestas(pos_x:int,pos_y:int)->int:
     
     return respuesta
 
-def blitear_preguntas_respuestas(ventana:pygame.Surface, recursos:dict, pregunta:str, respuestas:int,imagen_actual:pygame.Surface)->None:
+def blitear_preguntas_respuestas(ventana:pygame.Surface, recursos:dict, pregunta:str, respuestas:int)->None:
     """
     Blitea las preguntas y las respuestas en la pantalla a la hora de jugar, y el estilo
     
@@ -137,7 +181,7 @@ def blitear_preguntas_respuestas(ventana:pygame.Surface, recursos:dict, pregunta
     
     """
     
-    ventana.blit(imagen_actual, (0,0)) 
+    ventana.blit(recursos["fondo_inicio2"], (0,0)) 
     ventana.blit(recursos["preguntador"], (370,0))
     ventana.blit(recursos["box_pregunta"], (300, 250))
         
@@ -149,15 +193,14 @@ def blitear_preguntas_respuestas(ventana:pygame.Surface, recursos:dict, pregunta
     respuesta1_pregunta1 = recursos["fuente_respuestas"].render(respuestas[0], False, colores.AZUL)
     ventana.blit(respuesta1_pregunta1, (190, 410))
     respuesta2_pregunta1 = recursos["fuente_respuestas"].render(respuestas[1], False, colores.AZUL)
-    ventana.blit(respuesta2_pregunta1, (695, 410))
+    ventana.blit(respuesta2_pregunta1, (680, 410))
     respuesta3_pregunta1 = recursos["fuente_respuestas"].render(respuestas[2], False, colores.AZUL)
     ventana.blit(respuesta3_pregunta1, (190, 500))
     respuesta4_pregunta1 = recursos["fuente_respuestas"].render(respuestas[3], False, colores.AZUL)
-    ventana.blit(respuesta4_pregunta1, (700, 500))
+    ventana.blit(respuesta4_pregunta1, (680, 500))
 
     pregunta_1 = recursos["fuente_preguntas"].render(pregunta, False, colores.BLANCO, colores.NEGRO)
-    ventana.blit(pregunta_1, (284, 275))
-    
+    ventana.blit(pregunta_1, (330, 290))   
     
 
 
@@ -202,34 +245,33 @@ def click_continuar (pos_x: int, pos_y: int, evento_pregunta1: int):
     if pos_x >= 350 and pos_x <=(350 + 300) and pos_y >= 200 and pos_y <= (200 + 97):
         pygame.event.post(pygame.event.Event(evento_pregunta1))
 
-def cambiar_ventanas (ventana: pygame.Surface, recursos: dict):
-    
-    #recursos["fondo_inicio"] = recursos["fondo_inicio2"]
-    ventana.blit(recursos["fondo_inicio2"], (0,0))
-    ventana.blit(recursos["gatito_sostiene"], (350,240))
-    ventana.blit(recursos["mensaje_continuar"], (350,200))
-
-
 def ganaste(ventana: pygame.Surface, recursos: dict):
-    ventana.blit(recursos["ganaste"], (300, 200))
+    ventana.blit(recursos["ganaste"], (300, 90))
     mensaje_ganaste = "¡Ganaste!"
     texto_ganaste = recursos["fuente_ganaste"].render(mensaje_ganaste, False, colores.BLANCO)
-    ventana.blit(texto_ganaste, (200, 90))
+    ventana.blit(texto_ganaste, (350, 90))
 
-def retirarse_seguir (ventana: pygame.Surface, recursos: dict, pos_x: int, pos_y: int, evento_pregunta1: int):
+def retirarse_seguir (ventana: pygame.Surface, recursos: dict):
+
     ventana.blit(recursos["fondo_inicio2"], (0, 0))
     ventana.blit(recursos["continuar"], (350, 100))
     ventana.blit(recursos["gatito_pensando"], (400, 300))
     ventana.blit(recursos["yes"], (300, 200))
     ventana.blit(recursos["no"], (600, 200))
+    pygame.display.flip()
 
     ancho= 100
-    alto= 101
+    alto= 90
 
-    if pos_x >= 300 and pos_x <= (300 + ancho) and pos_y >= 200 and pos_y <= (200 + alto):
-        pygame.event.post(pygame.event.Event(evento_pregunta1))
-    elif pos_x >= 600 and pos_x <= (600 + ancho) and pos_y >= 200 and pos_y <= (200 + alto):
-        ventana.blit(recursos["retirada"], (300, 200))
-        ventana.blit(recursos["se_retira"], (100, 200))
-    
-
+    ejecutar = True
+    while ejecutar:
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pos_x, pos_y = pygame.mouse.get_pos()
+               
+                if pos_x >= 300 and pos_x <= (300 + ancho) and pos_y >= 200 and pos_y <= (200 + alto):
+                    return True  
+                elif pos_x >= 600 and pos_x <= 700 and pos_y >= 200 and pos_y <= 290:
+                    return False  
+            elif event.type == pygame.QUIT:
+                return None
