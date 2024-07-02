@@ -6,13 +6,7 @@ El juego inicia con una pagina de inicio en la que luego de hacer click, aparece
 
 ## Tabla de Contenidos
 - [Capturas de Pantalla](#capturas-de-pantalla)
-
+- [Estructura del juego](#estructura-juego)
 ## Capturas de Pantalla
-![Empieza el juego con la primer pregunta](pregunta.png)
-![Por cada pregunta correcta se pregunta si desea continuar](desea continuar.png)
-![Se muetra el record en pantalla](record.png)
-![Game over cuando se selecciona la respuesta incorrecta](respuesta incorrecta.png)
-![Si se retira el jugador](retirada.png)
-![Cuando se acaba el tiempo](tiempo acabado.png)
-![Cuando se gana la partida](ganaste.png)
+
 
