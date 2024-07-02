@@ -246,10 +246,10 @@ def click_continuar (pos_x: int, pos_y: int, evento_pregunta1: int):
         pygame.event.post(pygame.event.Event(evento_pregunta1))
 
 def ganaste(ventana: pygame.Surface, recursos: dict):
-    ventana.blit(recursos["ganaste"], (300, 90))
+    ventana.blit(recursos["ganaste"], (280, 90))
     mensaje_ganaste = "¡Ganaste!"
     texto_ganaste = recursos["fuente_ganaste"].render(mensaje_ganaste, False, colores.BLANCO)
-    ventana.blit(texto_ganaste, (350, 90))
+    ventana.blit(texto_ganaste, (410, 50))
 
 def retirarse_seguir (ventana: pygame.Surface, recursos: dict):
 

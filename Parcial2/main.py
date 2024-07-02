@@ -97,7 +97,7 @@ while ejecutar:
 
                     elif bandera_seguir == False:
                         ventana.blit(recursos["fondo_inicio2"], (0, 0))
-                        ventana.blit(recursos["retirada"], (300, 200))
+                        ventana.blit(recursos["retirada"], (310, 200))
                         ventana.blit(recursos["se_retira"], (300, 320))
                         texto_loganado = recursos["fuente_loganado"].render(f"{premio_ganado}", False, colores.NEGRO)
                         ventana.blit(texto_loganado, (400, 240))
@@ -123,8 +123,8 @@ while ejecutar:
 
                 elif respuesta != -1:
                     mostrar_botones = False
-                    ventana.blit(recursos["respuesta_incorrecta"], (300, 90)) 
                     respuesta_incorrecta(ventana, recursos)
+                    ventana.blit(recursos["respuesta_incorrecta"], (340, 90)) 
                     pygame.display.update()
                     pygame.time.delay(3000)
                     estamos_en_preguntas = False
@@ -170,7 +170,7 @@ while ejecutar:
         
         if tiempo <= 0:
             respuesta_incorrecta(ventana, recursos)
-            ventana.blit(recursos["tiempo_terminado"], (300, 90))
+            ventana.blit(recursos["tiempo_terminado"], (375, 90))
             cambiar_imagen()
             
             bandera_seguir = True
