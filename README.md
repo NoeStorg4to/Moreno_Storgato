@@ -16,4 +16,10 @@ El juego inicia con una pagina de inicio en la que luego de hacer click, aparece
 ![.](final.png)
 
 
-
+## Estructura del juego
+- main.py: Archivo principal en donde se ejecuta el juego.
+- funciones.py: Archivo en donde se cargan todas las funcionalidades del juego y su lógica.
+- colores.py: Archivo en donde quedan registrados algunos colores que puedan llegar a utilizarse.
+- Imagenes: Carpeta en donde se encuentran todas las imágenes que son utilizadas a lo largo del juego.
+- lista_preguntas.json: Archivo json en donde quedan cargadas todas las preguntas con sus respectivas posibles repuestas, y se guarda la respuesta correcta.
+- premios.csv: Archivo csv en donde se guardan los premios ganados de cada jugador, con el nombre que halla ingresado el mismo.
