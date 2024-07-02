@@ -8,12 +8,12 @@ El juego inicia con una pagina de inicio en la que luego de hacer click, aparece
 - [Capturas de Pantalla](#capturas-de-pantalla)
 - [Estructura del juego](#estructura-juego)
 ## Capturas de Pantalla
-!(las preguntas.png)
-!(record.png)
-!(eleccion.png)
-!(respuesta incorrecta.png)
-!(retirarse.png)
-!(final.png)
+![.](las preguntas.png)
+![.](record.png)
+![.](eleccion.png)
+![.](respuesta incorrecta.png)
+![.](retirarse.png)
+![.](final.png)
 
 
 
