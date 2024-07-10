@@ -18,8 +18,14 @@ def ganaste(ventana: pygame.Surface, recursos: dict):
 
 def retirarse_seguir (ventana: pygame.Surface, recursos: dict):
     """
-    Se le da la opción al usuario de seguir o retirarse, dependiendo de dónde clickee
-    
+    Se da la opcion de retirarse o seguir
+
+    Argumentos:
+        ventana (pygame.Surface): bliteo de las imagenes y botones
+        recursos (dict): donde estan cargadas las imagenes
+
+    Returns:
+        true / false: true en el caso de que continue / false en el caso de que se retire
     """
     ventana.blit(recursos["fondo_inicio2"], (0, 0))
     ventana.blit(recursos["continuar"], (350, 100))
@@ -59,6 +65,15 @@ def click_continuar (pos_x: int, pos_y: int, evento_pregunta1: int):
         pygame.event.post(pygame.event.Event(evento_pregunta1))
 
 def retirada (ventana: pygame.Surface, recursos: dict, premio_ganado: int):
+    """
+    En el caso de que se retire, informa el premio ganado
+
+    Argumentos:
+        ventana (pygame.Surface): bliteo de imagenes 
+        recursos (dict): en donde se encuentran cargadas las imagenes
+        premio_ganado (int): importe que ha ganado
+    """
+
     ventana.blit(recursos["fondo_inicio2"], (0, 0))
     ventana.blit(recursos["retirada"], (310, 200))
     ventana.blit(recursos["se_retira"], (300, 320))

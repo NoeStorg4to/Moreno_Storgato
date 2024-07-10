@@ -3,12 +3,21 @@ import colores
 
 
 def pedir_nombre(ventana: pygame.Surface, recursos: dict):
+    """
+    pide el nombre para luego guardarlo en un csv
+
+    Argumentos:
+        ventana (pygame.Surface): - blitea el box donde se ingresara el nombre
+                                - blitea el fondo
+        recursos (dict): trae las imagenes
+
+    Returns:
+        texto: el nombre
+    """
+
     pygame.font.init()
     texto = ""
     pedir_nombre = True
-
-    # mensaje = "Ingrese su nombre por teclado:"
-    # mensaje_superficie = recursos["fuente_mensaje_nombre"] .render(mensaje, True, colores.NEGRO)
 
     error_mensaje = ""
 
@@ -19,28 +28,23 @@ def pedir_nombre(ventana: pygame.Surface, recursos: dict):
                 exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    # Validar que el nombre contenga solo caracteres y tenga longitud máxima de 20
                     if texto.isalpha() and len(texto) <= 20:
                         pedir_nombre = False
                     else:
                         error_mensaje = ventana.blit(recursos["nombre_novalido"], (200, 350))
-                        #error_mensaje = "Nombre no válido. Use solo letras y máx. 20 caracteres."
                 elif event.key == pygame.K_BACKSPACE:
                     texto = texto[:-1]
                 else:
                     if len(texto) < 20:
                         texto += event.unicode
 
-        ventana.blit(recursos["fondo_inicio2"], (0, 0))
+        ventana.blit(recursos["fondo_nombre"], (0, 0))
         ventana.blit(recursos["ingrese_nombre"], (280, 50))
-        #ventana.blit(mensaje_superficie, (100, 50))
         ventana.blit(recursos["box_respuesta"], (385, 300))
         texto_superficie = recursos["fuente_ingreso_nombre"].render(texto, True, colores.AZUL)
         ventana.blit(texto_superficie, (400, 300))
 
         if error_mensaje:
-            # error_superficie = recursos["fuente_mensaje_error"].render(error_mensaje, True, colores.ROSITA)
-            # ventana.blit(error_superficie, (100, 250))
             ventana.blit(recursos["nombre_novalido"], (360, 430))
         
         pygame.display.flip()
@@ -91,12 +95,12 @@ def crear_temporizador(ventana:pygame.Surface, recursos:dict, inicio_tiempo:int,
     if tiempo_restante < 0:
         tiempo_restante = 0
 
-    texto_tiempo = recursos["fuente_reloj"].render(f"{str(tiempo_restante).zfill(2)}", False, colores.BLANCO,colores.NEGRO)
+    texto_tiempo = recursos["fuente_reloj"].render(f"{str(tiempo_restante).zfill(2)}", False, colores.BLANCO)
     ventana.blit(recursos["reloj"],(460,450))
     ventana.blit(texto_tiempo, (480,467))
     return tiempo_restante  
     
-def mostrar_record (ventana: pygame.Surface, recursos: dict, record: int) -> None:
+def mostrar_record (ventana: pygame.Surface, recursos: dict, record_maximo: int) -> None:
     """
     Muestra el dinero que se va ganando en pantalla.
 
@@ -110,11 +114,18 @@ def mostrar_record (ventana: pygame.Surface, recursos: dict, record: int) -> Non
     """
 
     ventana.blit(recursos["record"], (90, 90))
-    #ventana.blit(recursos["flecha"], (720, 30))
-    record_mostrado = recursos["texto_record"].render(f"{record}", False, colores.NEGRO)
+    record_mostrado = recursos["texto_record"].render(f"{record_maximo}", False, colores.NEGRO)
     ventana.blit(record_mostrado, (100, 130))
 
 def tabla_premios (posicion_flecha: pygame.Rect, accion: str):
+    """
+    - Maneja el movimiento de la flecha
+
+    Argumentos:
+        posicion_flecha (pygame.Rect): la posicion de la flecha cargada en formato Rect
+        accion (str): le paso por parametro si quiero que baje o se reinicie, dependiendo del evento
+    """
+
     decremento = 30
     
     if accion == "bajar":
@@ -123,9 +134,17 @@ def tabla_premios (posicion_flecha: pygame.Rect, accion: str):
         posicion_flecha.y = 0
 
 def cargar_flecha_rect ():
+    """
+    - Descarga la imagen de la flecha y la tranforma en un Rect
+
+    Returns:
+        flecha, posicion_flecha: devuelve la imagen y la posicion de la flecha
+    """
+
     flecha = pygame.image.load("Imagenes\\flecha.png")
     posicion_flecha = flecha.get_rect()
 
     posicion_flecha.topleft = (720, 0)
 
     return flecha, posicion_flecha
+

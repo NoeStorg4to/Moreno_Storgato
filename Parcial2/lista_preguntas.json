@@ -1,102 +1,105 @@
-[
-  {
-    "pregunta": "\u00bfQu\u00e9 animal guarda comida en sus cachetes?",
-    "respuestas": [
-      "Ardilla",
-      "Perro",
-      "Canguro",
-      "Pato"
-    ],
-    "correcta": 0
-  },
-  {
-    "pregunta": "\u00bfCu\u00e1l es el animal m\u00e1s r\u00e1pido del mundo?",
-    "respuestas": [
-      "Le\u00f3n",
-      "Guepardo",
-      "Tigre",
-      "Elefante"
-    ],
-    "correcta": 1
-  },
-  {
-    "pregunta": "\u00bfCu\u00e1l es la capital de Francia?",
-    "respuestas": [
-      "Berl\u00edn",
-      "Par\u00eds",
-      "Madrid",
-      "Roma"
-    ],
-    "correcta": 1
-  },
-  {
-    "pregunta": "\u00bfCu\u00e1l es el r\u00edo m\u00e1s largo del mundo?",
-    "respuestas": [
-      "Amazonas",
-      "Nilo",
-      "Yangst\u00e9",
-      "Misisipi"
-    ],
-    "correcta": 1
-  },
-  {
-    "pregunta": "\u00bfCu\u00e1l es el s\u00edmbolo qu\u00edmico del agua?",
-    "respuestas": [
-      "H2O",
-      "CO2",
-      "O2",
-      "NaCI"
-    ],
-    "correcta": 0
-  },
-  {
-    "pregunta": "\u00bfCu\u00e1l es la monta\u00f1a m\u00e1s alta del mundo?",
-    "respuestas": [
-      "K2",
-      "Aconcagua",
-      "Everest",
-      "Kilimanjaro"
-    ],
-    "correcta": 2
-  },
-  {
-    "pregunta": "\u00bfEn qu\u00e9 a\u00f1o comenz\u00f3 la Primera Guerra Mundial?",
-    "respuestas": [
-      "1914",
-      "1905",
-      "1939",
-      "1921"
-    ],
-    "correcta": 0
-  },
-  {
-    "pregunta": "\u00bfCu\u00e1l es la capital de Jap\u00f3n?",
-    "respuestas": [
-      "Bangkok",
-      "Se\u00fal",
-      "Pek\u00edn",
-      "Tokio"
-    ],
-    "correcta": 3
-  },
-  {
-    "pregunta": "\u00bfQu\u00e9 pa\u00eds tiene forma de bota en el mapa?",
-    "respuestas": [
-      "Italia",
-      "Espa\u00f1a",
-      "India",
-      "Santa F\u00e9"
-    ],
-    "correcta": 0
-  },
-  {
-    "pregunta": "\u00bfCu\u00e1l es el \u00f3rgano m\u00e1s grande del cuerpo humano?",
-    "respuestas": [
-      "Coraz\u00f3n",
-      "H\u00edgado",
-      "Piel",
-      "Intestinos"
-    ],
-    "correcta": 2
-  }
-]
+{
+    "record_maximo": 875000,
+    "preguntas": [
+        {
+            "pregunta": "\u00bfQu\u00e9 animal guarda comida en sus cachetes?",
+            "respuestas": [
+                "Ardilla",
+                "Perro",
+                "Canguro",
+                "Pato"
+            ],
+            "correcta": 0
+        },
+        {
+            "pregunta": "\u00bfCu\u00e1l es el animal m\u00e1s r\u00e1pido del mundo?",
+            "respuestas": [
+                "Le\u00f3n",
+                "Guepardo",
+                "Tigre",
+                "Elefante"
+            ],
+            "correcta": 1
+        },
+        {
+            "pregunta": "\u00bfCu\u00e1l es la capital de Francia?",
+            "respuestas": [
+                "Berl\u00edn",
+                "Par\u00eds",
+                "Madrid",
+                "Roma"
+            ],
+            "correcta": 1
+        },
+        {
+            "pregunta": "\u00bfCu\u00e1l es el r\u00edo m\u00e1s largo del mundo?",
+            "respuestas": [
+                "Amazonas",
+                "Nilo",
+                "Yangst\u00e9",
+                "Misisipi"
+            ],
+            "correcta": 1
+        },
+        {
+            "pregunta": "\u00bfCu\u00e1l es el s\u00edmbolo qu\u00edmico del agua?",
+            "respuestas": [
+                "H2O",
+                "CO2",
+                "O2",
+                "NaCI"
+            ],
+            "correcta": 0
+        },
+        {
+            "pregunta": "\u00bfCu\u00e1l es la monta\u00f1a m\u00e1s alta del mundo?",
+            "respuestas": [
+                "K2",
+                "Aconcagua",
+                "Everest",
+                "Kilimanjaro"
+            ],
+            "correcta": 2
+        },
+        {
+            "pregunta": "\u00bfEn qu\u00e9 a\u00f1o comenz\u00f3 la Primera Guerra Mundial?",
+            "respuestas": [
+                "1914",
+                "1905",
+                "1939",
+                "1921"
+            ],
+            "correcta": 0
+        },
+        {
+            "pregunta": "\u00bfCu\u00e1l es la capital de Jap\u00f3n?",
+            "respuestas": [
+                "Bangkok",
+                "Se\u00fal",
+                "Pek\u00edn",
+                "Tokio"
+            ],
+            "correcta": 3
+        },
+        {
+            "pregunta": "\u00bfQu\u00e9 pa\u00eds tiene forma de bota en el mapa?",
+            "respuestas": [
+                "Italia",
+                "Espa\u00f1a",
+                "India",
+                "Santa F\u00e9"
+            ],
+            "correcta": 0
+        },
+        {
+            "pregunta": "\u00bfCu\u00e1l es el \u00f3rgano m\u00e1s grande del cuerpo humano?",
+            "respuestas": [
+                "Coraz\u00f3n",
+                "H\u00edgado",
+                "Piel",
+                "Intestinos"
+            ],
+            "correcta": 2
+        }
+    ]
+}

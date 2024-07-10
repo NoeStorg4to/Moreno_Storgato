@@ -32,6 +32,8 @@ def cargar_recursos()->dict:
     recursos["ingrese_nombre"] = pygame.image.load("Imagenes\ingrese_nombre.jpg")
     recursos["nombre_novalido"] = pygame.image.load("Imagenes\\nombre_novalido.jpg")
     recursos["tabla_premios"] = pygame.image.load("Imagenes\\tabla_premio.png")
+    recursos["fondo_nombre"] = pygame.image.load("Imagenes\\fondo_nombre.jpeg")
+    recursos["fondo_nombre"] = pygame.transform.scale(recursos["fondo_nombre"], (1000, 625))
 
     recursos["fuente_preguntas"] = pygame.font.SysFont("Comic Sans MS", 15, True)
     recursos["fuente_respuestas"] = pygame.font.SysFont("Comic Sans MS", 30, True)
@@ -43,8 +45,6 @@ def cargar_recursos()->dict:
     recursos["fuente_mensaje_nombre"] = pygame.font.SysFont("Comic Sans MS", 40, True)
     recursos["fuente_mensaje_error"] = pygame.font.SysFont("Comic Sans MS", 30, True)
 
-
-    
     return recursos
 
 def obtener_respuestas(pos_x:int,pos_y:int)->int:
@@ -115,7 +115,28 @@ def blitear_preguntas_respuestas(ventana:pygame.Surface, recursos:dict, pregunta
 
 
 def respuesta_incorrecta (ventana: pygame.Surface, recursos: dict):
+    """
+    blitea las imagenes si se contesta erroneamente
+
+    Argumentos:
+        ventana (pygame.Surface): las imagenes bliteadas
+        recursos (dict): en donde se encuentran las imagenes descargadas
+    """
     
     ventana.blit(recursos["fondo_inicio2"], (0, 0))
     ventana.blit(recursos["gameover"], (300, 200)) 
     ventana.blit(recursos["respuesta_incorrecta"], (340, 90)) 
+
+def sin_tiempo(ventana: pygame.Surface, recursos: dict):
+    """
+    blitea las imagenes si se queda sin tiempo
+
+    Argumentos:
+        ventana (pygame.Surface): las imagenes bliteadas
+        recursos (dict): en donde se encuentran las imagenes descargadas
+    """
+
+    ventana.blit(recursos["fondo_inicio2"], (0, 0))
+    ventana.blit(recursos["gameover"], (300, 200)) 
+    ventana.blit(recursos["tiempo_terminado"], (375, 90))
+    
